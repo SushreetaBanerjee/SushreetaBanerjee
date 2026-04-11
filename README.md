@@ -1,14 +1,14 @@
 # Hi, I'm Sushreeta Banerjee! 👋
 
-Backend Developer with experience in building web applications using .NET technologies.
+Backend Developer specializing in .NET, C#, and SQL, building scalable web applications.
 
 
 ## 🚀 About Me
 
-- Currently working on application development using C#, .NET, SQL, and MVC
-- Skilled in building backend logic and implementing frontend features
-- Interested in Backend Development and Problem Solving
-- Continuously improving my skills in Data Structures and Algorithms
+- Currently developing web applications using C#, .NET, SQL, and MVC
+- Hands-on experience in building backend logic and implementing frontend features
+- Strong interest in Backend Development and System Design
+- Actively practicing Data Structures and Algorithms
 
 
 ## 🛠️ Tech Stack
@@ -18,8 +18,9 @@ Backend Developer with experience in building web applications using .NET techno
 - Tools: Git, Visual Studio
 
 ## 📌 Projects
-- Working on real-world applications using .NET MVC
-- Building CRUD-based systems and backend services
+- Developed CRUD-based web applications using ASP.NET MVC and SQL
+- Implemented backend services for data handling and business logic
+- Worked on database design and query optimization using SQL and PostgreSQL
 
 ## 📈 Current Focus
 - Strengthening backend development skills
