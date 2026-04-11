@@ -1,29 +1,30 @@
 # Hi, I'm Sushreeta Banerjee! 👋
 
-I am a passionate M.C.A CS student at University of Calcutta.
+Backend Developer with experience in building web applications using .NET technologies.
 
 
 ## 🚀 About Me
 
-- 🔭 I'm currently pursuing my Master's in Computer Science at   University of Calcutta
+- Currently working on application development using C#, .NET, SQL, and MVC
+- Skilled in building backend logic and implementing frontend features
+- Interested in Backend Development and Problem Solving
+- Continuously improving my skills in Data Structures and Algorithms
 
 
-## 📬 Get in Touch
+## 🛠️ Tech Stack
+- Languages: C#
+- Frameworks: .NET, ASP.NET MVC
+- Databases: SQL, PostgreSQL, PL/SQL
+- Tools: Git, Visual Studio
 
-- Connect with me on Linkdin.
-- Connect with me on Instagram.
+## 📌 Projects
+- Working on real-world applications using .NET MVC
+- Building CRUD-based systems and backend services
 
-Thanks for stopping by! Let's connect and explore the fascinating world of technology together. 🚀
-<!--
+## 📈 Current Focus
+- Strengthening backend development skills
+- Practicing DSA for problem-solving
 
-Here are some ideas to get you started:
+## 📫 Connect with Me
+- LinkedIn: (https://www.linkedin.com/in/sushreeta-banerjee/)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on …
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: …
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
