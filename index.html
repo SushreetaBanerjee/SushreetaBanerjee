@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sushreeta Banerjee — Backend .NET Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E1116;
+    --bg-raised: #151A21;
+    --bg-card: #11151B;
+    --border: #232A35;
+    --border-soft: #1A2029;
+    --text-primary: #E8E6E1;
+    --text-secondary: #7C8DB5;
+    --text-tertiary: #4A5568;
+    --accent: #4FD1C5;
+    --accent-dim: #2E8B82;
+    --accent-glow: rgba(79, 209, 197, 0.15);
+    --warn: #D97757;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(var(--border-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(14, 17, 22, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--text-tertiary); }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
+  .nav-links { padding: 0; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 100px 0 80px;
+    position: relative;
+  }
+  .query-line {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .query-line .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero h1 {
+    font-family: var(--mono);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero-role {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-bottom: 36px;
+  }
+  .hero-desc strong { color: var(--text-primary); font-weight: 600; }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #06231F;
+  }
+  .btn-primary:hover { background: #6EE0D6; transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- SECTION LABEL (signature element) ---------- */
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 24px;
+    color: var(--text-tertiary);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sec-label::before { content: '--'; color: var(--accent-dim); }
+  .sec-label .tag {
+    color: var(--accent);
+  }
+
+  section { padding: 64px 0; border-top: 1px solid var(--border-soft); }
+
+  /* ---------- ABOUT ---------- */
+  .about-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 640px;
+  }
+  .about-text strong { color: var(--text-primary); font-weight: 600; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 40px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .stat-cell { background: var(--bg-card); padding: 20px 18px; }
+  .stat-num { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 12.5px; color: var(--text-secondary); margin-top: 4px; }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 28px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-period {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-tertiary);
+    padding-top: 3px;
+  }
+  .tl-period .current {
+    color: var(--accent);
+  }
+  .tl-role { font-size: 16.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .tl-company { font-family: var(--mono); font-size: 13px; color: var(--accent-dim); margin-bottom: 12px; }
+  .tl-points { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .tl-points li {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    padding-left: 18px;
+    position: relative;
+  }
+  .tl-points li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent-dim);
+    font-family: var(--mono);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid { display: flex; flex-direction: column; gap: 16px; }
+  .proj-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 26px 28px;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .proj-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+  .proj-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .proj-name { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+  .proj-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid var(--accent-dim);
+    padding: 5px 12px;
+    border-radius: 5px;
+    transition: background 0.2s ease;
+  }
+  .proj-link:hover { background: var(--accent-glow); }
+  .proj-private {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-tertiary);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .proj-desc { font-size: 14.5px; color: var(--text-secondary); margin-bottom: 16px; max-width: 620px; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-table { display: flex; flex-direction: column; gap: 1px; background: var(--border-soft); border: 1px solid var(--border-soft); border-radius: 8px; overflow: hidden; }
+  .skill-row { display: grid; grid-template-columns: 140px 1fr; background: var(--bg-card); padding: 16px 20px; gap: 20px; align-items: center; }
+  .skill-key { font-family: var(--mono); font-size: 12.5px; color: var(--text-tertiary); }
+  .skill-vals { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-row { display: grid; grid-template-columns: 150px 1fr auto; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border-soft); align-items: baseline; }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-period { font-family: var(--mono); font-size: 12.5px; color: var(--text-tertiary); }
+  .edu-degree { font-size: 15.5px; font-weight: 600; color: var(--text-primary); }
+  .edu-school { font-size: 13.5px; color: var(--text-secondary); margin-top: 2px; }
+  .edu-gpa { font-family: var(--mono); font-size: 13px; color: var(--accent); white-space: nowrap; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 18px 20px;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .contact-card:hover { border-color: var(--accent-dim); }
+  .contact-card .ckey { font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .contact-card .cval { font-size: 14.5px; color: var(--text-primary); font-weight: 500; word-break: break-word; }
+
+  footer {
+    padding: 40px 0 60px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 640px) {
+    .nav-links { gap: 14px; }
+    .nav-links a { font-size: 11px; }
+    .tl-row { grid-template-columns: 1fr; gap: 8px; }
+    .about-stats { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .skill-row { grid-template-columns: 1fr; gap: 8px; }
+    .edu-row { grid-template-columns: 1fr; }
+    .hero { padding: 70px 0 50px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">sushreeta<span>.dev</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="top" class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none; padding-top:90px;">
+    <div class="query-line">
+      <span class="dot"></span>
+      SELECT * FROM Developers WHERE stack = 'Dotnet' AND status = 'Available'
+    </div>
+    <h1>Sushreeta Banerjee<br><span class="accent">Backend.Developer</span></h1>
+    <p class="hero-role">Backend .NET Developer · C# · ASP.NET MVC · EF Core · SQL Server</p>
+    <p class="hero-desc">
+      Building <strong>production-grade backend systems</strong> for enterprise and government platforms.
+      1.5+ years delivering real, deployed software — from <strong>NIC government contracts</strong>
+      to <strong>retail ERP systems</strong> — not just tutorials.
+    </p>
+    <div class="hero-actions">
+      <a href="Sushreeta_Banerjee_Resume_SDE-1.pdf" download class="btn btn-primary" id="resume-btn">↓ Download Résumé</a>
+      <a href="https://github.com/SushreetaBanerjee" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+      <a href="https://www.linkedin.com/in/sushreeta-banerjee/" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-label"><span class="tag">About</span></div>
+    <p class="about-text">
+      I'm a backend developer specializing in the <strong>.NET ecosystem</strong> — C#, ASP.NET MVC,
+      Entity Framework Core, and SQL Server. My work spans <strong>government-contracted systems</strong>
+      built under the National Informatics Centre and <strong>retail ERP platforms</strong> at Ginesys,
+      one of India's leading omnichannel retail-tech companies. I care about clean 3-layer architecture,
+      query optimization, and writing backend code that survives contact with real production traffic.
+    </p>
+    <div class="about-stats">
+      <div class="stat-cell">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Production systems shipped</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">2</div>
+        <div class="stat-label">NIC government contracts</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">1.5+</div>
+        <div class="stat-label">Years backend experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sec-label"><span class="tag">Experience</span></div>
+    <div class="timeline">
+
+      <div class="tl-row">
+        <div class="tl-period">Jan 2026 — <span class="current">Present</span></div>
+        <div>
+          <div class="tl-role">Software Developer</div>
+          <div class="tl-company">Quantum Asia Pvt Ltd</div>
+          <ul class="tl-points">
+            <li>Delivering backend feature modules for NIC-contracted government projects using C#, .NET, MVC, and SQL Server.</li>
+            <li>Working within sprint-based delivery cycles on production-bound enterprise systems.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-period">Apr 2025 — Dec 2025</div>
+        <div>
+          <div class="tl-role">Junior Software Developer</div>
+          <div class="tl-company">GINESYS (Ginni Systems Ltd.)</div>
+          <ul class="tl-points">
+            <li>Developed and optimized backend modules for a retail ERP platform using C#, .NET, and SQL Server.</li>
+            <li>Improved query performance and resolved production issues through cross-functional collaboration with QA and support teams.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-period">Jan 2025 — Apr 2025</div>
+        <div>
+          <div class="tl-role">Intern</div>
+          <div class="tl-company">National Informatics Centre (NIC)</div>
+          <ul class="tl-points">
+            <li>Built dynamic web modules using PHP, JavaScript, and Bootstrap with PostgreSQL integration for government platforms.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-period">Apr 2024 — May 2024</div>
+        <div>
+          <div class="tl-role">Summer Intern</div>
+          <div class="tl-company">IIT Kanpur Fellowship</div>
+          <ul class="tl-points">
+            <li>Optimized scientific simulations through C vectorization, profiling, and memory tuning.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-label"><span class="tag">Projects</span></div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">ERP Billing Management System</div>
+          <a href="https://github.com/SushreetaBanerjee/ERP_Billing_System" target="_blank" rel="noopener" class="proj-link">View Code →</a>
+        </div>
+        <p class="proj-desc">
+          Personal clone and extension of an enterprise ERP billing system built with 3-layer architecture.
+          Covers GST invoicing, payment tracking, and a live revenue dashboard — built independently to
+          reinforce enterprise architecture patterns.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">ASP.NET MVC 8</span>
+          <span class="tag">EF Core</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">3-Layer Architecture</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">Cold Storage Management System</div>
+          <span class="proj-private">Private</span>
+        </div>
+        <p class="proj-desc">
+          Production-deployed cold storage management system built under a government contract.
+          Designed and implemented a 3-layer REST API handling database design and backend logic
+          for inventory and billing operations.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">ASP.NET MVC</span>
+          <span class="tag">EF Core</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">REST API</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">West Bengal Grading &amp; Marketing Certification</div>
+          <span class="proj-private">Private</span>
+        </div>
+        <p class="proj-desc">
+          Lab management system for commodity testing and result generation, built for a state government
+          certification body. Backend modules handled test workflows and result reporting.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">C#</span>
+          <span class="tag">.NET</span>
+          <span class="tag">SQL Server</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">GDS — Webhook Integration Module</div>
+          <span class="proj-private">Private</span>
+        </div>
+        <p class="proj-desc">
+          Backend development on data flow and endpoint reliability for client-facing webhook integrations.
+          Contributed to the database team — fixed and optimized stored procedures and cursors to ensure
+          data integrity across client environments.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">C#</span>
+          <span class="tag">.NET</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Stored Procedures</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-label"><span class="tag">Skills</span></div>
+    <div class="skill-table">
+      <div class="skill-row">
+        <div class="skill-key">Languages</div>
+        <div class="skill-vals">
+          <span class="tag">C#</span><span class="tag">SQL</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">C</span><span class="tag">Java</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-key">Backend</div>
+        <div class="skill-vals">
+          <span class="tag">ASP.NET MVC</span><span class="tag">.NET Core</span><span class="tag">EF Core</span><span class="tag">REST APIs</span><span class="tag">LINQ</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-key">Databases</div>
+        <div class="skill-vals">
+          <span class="tag">SQL Server</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-key">Architecture</div>
+        <div class="skill-vals">
+          <span class="tag">3-Layer Architecture</span><span class="tag">Repository Pattern</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-key">Tools</div>
+        <div class="skill-vals">
+          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">SSMS</span><span class="tag">Visual Studio</span><span class="tag">Postman</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-label"><span class="tag">Education</span></div>
+    <div class="edu-row">
+      <div class="edu-period">2023 — 2025</div>
+      <div>
+        <div class="edu-degree">Master of Computer Applications (MCA)</div>
+        <div class="edu-school">University of Calcutta</div>
+      </div>
+      <div class="edu-gpa">CGPA 7.98</div>
+    </div>
+    <div class="edu-row">
+      <div class="edu-period">2020 — 2023</div>
+      <div>
+        <div class="edu-degree">B.Sc. in Computer Science</div>
+        <div class="edu-school">Sidho-Kanho-Birsha University</div>
+      </div>
+      <div class="edu-gpa">CGPA 9.62</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sec-label"><span class="tag">Contact</span></div>
+    <p class="about-text">Open to backend .NET developer roles. Reach out directly — I reply fast.</p>
+    <div class="contact-grid">
+      <a href="mailto:sushreetabanerjee0806@gmail.com" class="contact-card">
+        <span class="ckey">Email</span>
+        <span class="cval">sushreetabanerjee0806@gmail.com</span>
+      </a>
+      <a href="tel:+917363805097" class="contact-card">
+        <span class="ckey">Phone</span>
+        <span class="cval">+91 73638 05097</span>
+      </a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener" class="contact-card">
+        <span class="ckey">LinkedIn</span>
+        <span class="cval">linkedin.com/in/sushreeta-banerjee</span>
+      </a>
+      <a href="https://github.com/" target="_blank" rel="noopener" class="contact-card">
+        <span class="ckey">GitHub</span>
+        <span class="cval">github.com/sushreeta-banerjee</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Kolkata, West Bengal · Built with care, queried with confidence.
+  </footer>
+
+</div>
+
+</body>
+</html>
